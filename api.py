@@ -20,11 +20,8 @@ def predict():
         jpeg_original = base64.b64decode(bytes(image.split(',')[1], "utf-8"))
         jpeg_as_np = np.frombuffer(jpeg_original, dtype=np.uint8)
         image = cv2.imdecode(jpeg_as_np, cv2.IMREAD_GRAYSCALE)
-        cv2.imwrite('image_original.jpeg', image)
         image = cv2.resize(image, (28, 28), interpolation=cv2.INTER_LINEAR)
-        cv2.imwrite('image_resized.jpeg', image)
         image = cv2.bitwise_not(image)
-        cv2.imwrite('image_inverted.jpeg', image)
         image = image.reshape(1, 28, 28, 1)
         image = image / 255.0
         print(image)
